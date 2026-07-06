@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 user_selections = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    webapp_url = os.getenv("WEBAPP_URL", "https://example.com")
+    webapp_url = os.getenv("WEBAPP_URL", "https://muhamedshinova-netizen.github.io/kadze/")
     keyboard = [[InlineKeyboardButton("🎨 Создать анимацию", web_app=WebAppInfo(url=webapp_url))]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(
