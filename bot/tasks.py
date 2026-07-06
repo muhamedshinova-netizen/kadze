@@ -6,19 +6,19 @@ from config import REPLICATE_API_TOKEN
 replicate_client = replicate.Client(api_token=REPLICATE_API_TOKEN)
 
 def generate_animation(image_url: str, category: str, style: str, user_id: int) -> str:
-    # Используем Stable Video Diffusion — официальную модель Stability AI
+    # Бесплатная модель стилизации (не видео)
     output = replicate_client.run(
-        "stability-ai/stable-video-diffusion:3f0457e4619daac51203dedb472816fd4af51f3149fa7a9e0b5ffcf1b8172438",
+        "tencentarc/gfpgan:9283608cc6b7be6b65a8e44983db012355fde4132009bf99d976b2f0896856a3",
         input={
-            "cond_image": image_url,
-            "motion_bucket_id": 80,
-            "fps": 15,
-            "decoding_t": 4,
+            "img": image_url,
+            "scale": 2,
+            "version": "v1.4"
         }
     )
-    video_url = output
-    response = requests.get(video_url)
-    tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.mp4')
+    # output — это URL улучшенного изображения
+    image_url_result = output
+    response = requests.get(image_url_result)
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
     tmp.write(response.content)
     tmp.close()
     return tmp.name
