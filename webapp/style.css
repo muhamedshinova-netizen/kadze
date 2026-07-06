@@ -1,0 +1,30 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #fff8f0;
+    color: #5a4a3a;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+.upload-area {
+    border: 2px dashed #e0c9a6;
+    padding: 40px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #fffdf7;
+    margin: 20px 0;
+}
+.button {
+    background: #f0a868;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
