@@ -6,26 +6,14 @@ from config import REPLICATE_API_TOKEN
 replicate_client = replicate.Client(api_token=REPLICATE_API_TOKEN)
 
 def generate_animation(image_url: str, category: str, style: str, user_id: int) -> str:
-    prompts = {
-        "portrait": {
-            "лесной дух": "portrait of a person, forest spirit, leaves around, gentle breeze moving hair, dappled light, soft focus background, studio ghibli style, warm colors, hand-drawn animation",
-            "default": "soft portrait, gentle smile, warm light, animated hair movement, ghibli style"
-        },
-        "nature": {
-            "закат над водой": "sunset over lake, calm water ripples, glowing sun, silhouettes of trees, soft pastel, studio ghibli style, animated",
-            "default": "beautiful nature landscape, soft wind, moving clouds, ghibli style"
-        },
-    }
-    prompt = prompts.get(category, {}).get(style, "warm animated scene, studio ghibli style, masterpiece")
-
+    # Используем Stable Video Diffusion — официальную модель Stability AI
     output = replicate_client.run(
-        "lucataco/hotshot-xl:78b4e0a22f8b8b1d7c3b0e8d6a5c3a0d5b2c7e1f6e9a2b4d7c8f1e0a3b5c6d8",
+        "stability-ai/stable-video-diffusion:3f0457e4619daac51203dedb472816fd4af51f3149fa7a9e0b5ffcf1b8172438",
         input={
-            "image": image_url,
-            "prompt": prompt,
-            "num_frames": 24,
+            "cond_image": image_url,
+            "motion_bucket_id": 80,
             "fps": 15,
-            "guidance_scale": 7.5,
+            "decoding_t": 4,
         }
     )
     video_url = output
