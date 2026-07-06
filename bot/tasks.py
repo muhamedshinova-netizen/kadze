@@ -19,7 +19,7 @@ def generate_animation(image_url: str, category: str, style: str, user_id: int) 
     prompt = prompts.get(category, {}).get(style, "warm animated scene, studio ghibli style, masterpiece")
 
     output = replicate_client.run(
-        "lucataco/animate-diff:6711a170e4e8e5c3e6b2f0a5d3c3b0e7b7e2f1e0f8d8d5e9a1d7c6b2d7f4c3b1",
+        "lucataco/hotshot-xl:78b4e0a22f8b8b1d7c3b0e8d6a5c3a0d5b2c7e1f6e9a2b4d7c8f1e0a3b5c6d8",
         input={
             "image": image_url,
             "prompt": prompt,
